@@ -30,16 +30,12 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private BottomNavigationView bottomNavigationView;
-
-    private Button go_notification_activity;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
-    private CardView member, video_call, notice, calls, motives, location, sms, gallery, profile;
+
     private long pressedTime;
-    private TextView tv;
 
 
     @Override

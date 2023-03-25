@@ -37,7 +37,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/members"
+                        android:id="@+id/product_qr"
                         android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:layout_margin="5dp"
@@ -62,7 +62,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/ubuntu_bold"
+                        android:fontFamily="@font/sf_ns_bold"
                         android:gravity="center"
                         android:text="Create Product QR"
                         android:textAllCaps="false"
@@ -84,7 +84,7 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/video_call"
+                            android:id="@+id/message"
                             android:layout_width="65dp"
                             android:layout_height="65dp"
                             android:layout_margin="5dp"
@@ -109,7 +109,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/ubuntu_bold"
+                            android:fontFamily="@font/sf_ns_bold"
                             android:gravity="center"
                             android:text="Create SMS QR"
                             android:textAllCaps="false"
@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/ubuntu_bold"
+                            android:fontFamily="@font/sf_ns_bold"
                             android:gravity="center"
                             android:text="Create wifi \nCode"
                             android:textAllCaps="false"
@@ -187,7 +187,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/calls"
+                        android:id="@+id/weburl"
                         android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:layout_margin="5dp"
@@ -212,7 +212,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/ubuntu_bold"
+                        android:fontFamily="@font/sf_ns_bold"
                         android:gravity="center"
                         android:text="Create URL QR"
                         android:textAllCaps="false"
@@ -259,7 +259,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/ubuntu_bold"
+                            android:fontFamily="@font/sf_ns_bold"
                             android:gravity="center"
                             android:text="Create Contract QR"
                             android:textAllCaps="false"
@@ -307,7 +307,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/ubuntu_bold"
+                            android:fontFamily="@font/sf_ns_bold"
                             android:gravity="center"
                             android:text="Create Bar Code"
                             android:textAllCaps="false"

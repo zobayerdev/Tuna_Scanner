@@ -4,6 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        jcenter()
     }
 }
 dependencyResolutionManagement {
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        jcenter()
     }
 }
 rootProject.name = "Tuna Scanner"
