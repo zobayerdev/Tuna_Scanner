@@ -28,6 +28,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
+import androidmads.library.qrgenearator.BuildConfig;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -150,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "The Holy Quran -Islamic App");
-                    String shareMessage = "\nThe Holy Quran -Islamic App অ্যাপটি ডাউনলোড করুন\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tuna Scanner");
+                    String shareMessage = "\nTuna Scanner App অ্যাপটি ডাউনলোড করুন\n\n";
                     shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
                     shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                     startActivity(Intent.createChooser(shareIntent, "choose one"));
