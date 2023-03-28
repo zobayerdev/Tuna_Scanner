@@ -7,7 +7,7 @@
    <ImageView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_person"
+        android:src="@drawable/tuna_scanner"
         android:contentDescription="@string/app_name"
        android:layout_gravity="center"
        />

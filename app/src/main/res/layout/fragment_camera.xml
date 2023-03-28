@@ -6,12 +6,13 @@
     tools:context=".CameraFragment">
 
     <TextView
+        android:id="@+id/resutl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="@font/tinos_bold"
-        android:text="Scanner"
+        android:text="Scanner QR and Bar Code"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

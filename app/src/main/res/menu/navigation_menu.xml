@@ -4,7 +4,8 @@
     <item
         android:title="Notification"
         android:id="@+id/nav_notification_notice"
-        android:icon="@drawable/ic_notification"/>
+        android:icon="@drawable/ic_notification"
+        />
     <item
         android:title="Developer"
         android:id="@+id/nav_dev"

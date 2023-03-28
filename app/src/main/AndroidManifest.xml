@@ -8,6 +8,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,10 +18,17 @@
         android:theme="@style/Theme.TunaScanner"
         tools:targetApi="31">
         <activity
+            android:name=".BarCodeGenerator"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ContactActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MessageActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
-            />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".URLActivity"
             android:exported="true"
@@ -38,6 +46,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+
+        <activity android:name=".Capture"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"/>
+
     </application>
 
 </manifest>

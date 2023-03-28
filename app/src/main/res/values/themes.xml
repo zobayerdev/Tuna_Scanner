@@ -26,4 +26,8 @@
     <style name="Theme.TunaScanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.TunaScanner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/sf_ns_bold</item>
+    </style>
+
 </resources>

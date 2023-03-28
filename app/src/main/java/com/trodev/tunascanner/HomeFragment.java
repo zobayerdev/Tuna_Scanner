@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 public class HomeFragment extends Fragment {
 
-    private CardView product_qr, weburl, message;
+    private CardView contact, product_qr, weburl, message, barcode;
 
 
     public HomeFragment() {
@@ -28,9 +28,11 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        contact = view.findViewById(R.id.contact);
         product_qr = view.findViewById(R.id.product_qr);
         weburl = view.findViewById(R.id.weburl);
         message = view.findViewById(R.id.message);
+        barcode = view.findViewById(R.id.barcode);
         product_qr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +53,22 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ContactActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        barcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BarCodeGenerator.class);
                 startActivity(intent);
             }
         });

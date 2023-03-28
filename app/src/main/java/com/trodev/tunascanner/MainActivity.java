@@ -1,14 +1,20 @@
 package com.trodev.tunascanner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,7 +31,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import androidmads.library.qrgenearator.BuildConfig;
@@ -119,6 +128,54 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, cameraFragment, "ScannerListFragment");
         fragmentTransaction.commit();
+
+        IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+        intentIntegrator.setPrompt("For flash use volume up key");
+        intentIntegrator.setBeepEnabled(true);
+        intentIntegrator.setOrientationLocked(true);
+        intentIntegrator.setCaptureActivity(Capture.class);
+        intentIntegrator.initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult.getContents() != null)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Scanning Result");
+            builder.setMessage(intentResult.getContents());
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.this.getClass());
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            builder.setNeutralButton("Copy", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("EditText", intentResult.getContents());
+                    clipboard.setPrimaryClip(clipData);
+
+                    Toast.makeText(getApplicationContext(), "Text Copied Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.this.getClass());
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            builder.show();
+        }
+        else{
+            Toast.makeText(this, "Opps!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -130,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.nav_notification_notice:
-                Toast.makeText(this, "নোটিফিকেশান!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Notification", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_dev:
                 final Dialog dialog = new Dialog(this);
@@ -142,22 +199,22 @@ public class MainActivity extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
-                Toast.makeText(this, "ডেভেলপার পরিচয়!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Developer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_policy:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.app-privacy-policy.com/live.php?token=qB3iS10fUJmr6yEFtaVo9yve0uuPP3Ok")));
-                Toast.makeText(this, "প্রাইভেসি পলিসি!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Privacy Policy", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_share:
                 try {
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tuna Scanner");
-                    String shareMessage = "\nTuna Scanner App অ্যাপটি ডাউনলোড করুন\n\n";
+                    String shareMessage = "\nTuna Scanner App Download now\n\n";
                     shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
                     shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                     startActivity(Intent.createChooser(shareIntent, "choose one"));
-                    Toast.makeText(this, "শেয়ার করুন!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Share Apps", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     //e.toString();
                 }
@@ -165,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_rate:
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
-                    Toast.makeText(this, "রেটিং দিন!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Rate us", Toast.LENGTH_SHORT).show();
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
                 }
