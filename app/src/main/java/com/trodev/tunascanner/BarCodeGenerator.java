@@ -62,27 +62,30 @@ public class BarCodeGenerator extends AppCompatActivity {
                 }*/
                 // ##################################
 
-                try {
-                    bitmap = textToImageEncode("Title:  " + title.getText().toString() + "\n Details:  " + details.getText().toString().trim());
-                    imageView.setImageBitmap(bitmap);
-                    download.setVisibility(View.VISIBLE);
-                    Bitmap finalBitmap = bitmap;
-                    // download image to gallery
-                    download.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            MediaStore.Images.Media.insertImage(getContentResolver(), finalBitmap, "Contact_Identity"
-                                    , null);
-                            Toast.makeText(BarCodeGenerator.this, "Download Complete", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                if (title.getText().toString().length() + details.getText().toString().length() == 0) {
+                    Toast.makeText(BarCodeGenerator.this, "Make sure your given Text..!", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        bitmap = textToImageEncode("Title:  " + title.getText().toString() + "\n Details:  " + details.getText().toString().trim());
+                        imageView.setImageBitmap(bitmap);
+                        download.setVisibility(View.VISIBLE);
+                        Bitmap finalBitmap = bitmap;
+                        // download image to gallery
+                        download.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                MediaStore.Images.Media.insertImage(getContentResolver(), finalBitmap, "Contact_Identity"
+                                        , null);
+                                Toast.makeText(BarCodeGenerator.this, "Download Complete", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                } catch (WriterException e) {
-                    throw new RuntimeException(e);
+                    } catch (WriterException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
-
     }
 
     private Bitmap textToImageEncode(String value) throws WriterException {

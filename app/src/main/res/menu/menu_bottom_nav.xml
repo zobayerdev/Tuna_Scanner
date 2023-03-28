@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <item
         android:id="@+id/bottom_menu_home"
         android:icon="@drawable/ic_home"
         android:title="Home"
         android:fontFamily="@font/tinos_bold"
         />
-
-    <item
-        android:id="@+id/bottom_menu_scanner"
-        android:icon="@drawable/ic_scanner"
-        android:title="Camera"
-        android:fontFamily="@font/tinos_bold"
-        />
-
     <item
         android:id="@+id/bottom_menu_image"
         android:title="Images"

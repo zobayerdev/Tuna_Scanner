@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -82,12 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
                 if (itemId == R.id.bottom_menu_image) {
                     loadImagesFragment();
-                } else if (itemId == R.id.bottom_menu_home) {
-                    loadHomeFragment();
-                } else if (itemId == R.id.bottom_menu_scanner) {
-                    loadScannerFragment();
                 } else if (itemId == R.id.bottom_menu_pdf) {
                     loadPDFFragment();
+                } else if (itemId == R.id.bottom_menu_home) {
+                    loadHomeFragment();
                 } else {
                     Toast.makeText(MainActivity.this, "Invalid Click", Toast.LENGTH_SHORT).show();
                 }
@@ -122,21 +121,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void loadScannerFragment() {
+/*    private void loadScannerFragment() {
         setTitle("Scanner");
         CameraFragment cameraFragment = new CameraFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, cameraFragment, "ScannerListFragment");
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
-        IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+/*        IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
         intentIntegrator.setPrompt("For flash use volume up key");
         intentIntegrator.setBeepEnabled(true);
         intentIntegrator.setOrientationLocked(true);
         intentIntegrator.setCaptureActivity(Capture.class);
         intentIntegrator.initiateScan();
-    }
+        }*/
 
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "Opps!", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
