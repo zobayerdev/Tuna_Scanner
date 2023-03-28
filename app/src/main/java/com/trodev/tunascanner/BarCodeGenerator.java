@@ -92,12 +92,12 @@ public class BarCodeGenerator extends AppCompatActivity {
         BitMatrix bitMatrix;
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            bitMatrix = multiFormatWriter.encode(title.getText().toString() + details.getText().toString(), BarcodeFormat.CODE_128, imageView.getWidth(), imageView.getHeight());
+            bitMatrix = multiFormatWriter.encode(title.getText().toString() + details.getText().toString(), BarcodeFormat.CODE_128, imageView.getWidth(), imageView.getHeight()); //CODE_128
 
         } catch (IllegalArgumentException e) {
             return null;
         }
-        Bitmap bitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap bitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(), Bitmap.Config.RGB_565); //RGB_565
         for (int i = 0; i < imageView.getWidth(); i++) {
             for (int j = 0; j < imageView.getHeight(); j++) {
                 bitmap.setPixel(i, j, bitMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
