@@ -1,4 +1,4 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.trodev.tunascanner.R;
 
 public class BarCodeGenerator extends AppCompatActivity {
 

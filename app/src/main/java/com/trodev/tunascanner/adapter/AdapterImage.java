@@ -1,4 +1,4 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.trodev.tunascanner.activities.ImageViewActivity;
+import com.trodev.tunascanner.R;
+import com.trodev.tunascanner.models.ModelImage;
 
 import java.util.ArrayList;
 

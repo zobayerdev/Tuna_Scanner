@@ -1,4 +1,4 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.models;
 
 import android.net.Uri;
 

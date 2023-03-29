@@ -1,23 +1,23 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.trodev.tunascanner.R;
+import com.trodev.tunascanner.activities.BarCodeGenerator;
+import com.trodev.tunascanner.activities.ContactActivity;
+import com.trodev.tunascanner.activities.MessageActivity;
+import com.trodev.tunascanner.activities.ProductQRActivity;
+import com.trodev.tunascanner.activities.ScannerActivity;
+import com.trodev.tunascanner.activities.URLActivity;
 
 
 public class HomeFragment extends Fragment {

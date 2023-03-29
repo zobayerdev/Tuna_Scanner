@@ -1,4 +1,4 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.trodev.tunascanner.Capture;
+import com.trodev.tunascanner.R;
+import com.trodev.tunascanner.activities.MainActivity;
 
 
 public class CameraFragment extends Fragment {

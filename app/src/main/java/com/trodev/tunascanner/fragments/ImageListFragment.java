@@ -1,22 +1,28 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.fragments;
 
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,10 +43,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.trodev.tunascanner.Constant;
+import com.trodev.tunascanner.R;
+import com.trodev.tunascanner.adapter.AdapterImage;
+import com.trodev.tunascanner.models.ModelImage;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class ImageListFragment extends Fragment {
@@ -62,8 +74,9 @@ public class ImageListFragment extends Fragment {
     private ArrayList<ModelImage> allImageArrayList;
     private AdapterImage adapterImage;
 
-
     private Context mContext;
+
+    private ProgressDialog progressDialog;
 
     public ImageListFragment() {
         // Required empty public constructor
@@ -91,6 +104,12 @@ public class ImageListFragment extends Fragment {
 
         addImageFab = view.findViewById(R.id.addImageFab);
         imagesRv = view.findViewById(R.id.imagesRv);
+
+
+        //init setup progress dialog
+        progressDialog = new ProgressDialog(mContext);
+        progressDialog.setTitle("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         loadImages();
 
@@ -139,15 +158,157 @@ public class ImageListFragment extends Fragment {
                             deleteImages(false);
                         }
                     })
-                    .setNegativeButton("Cencel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                         }
                     })
                     .show();
+        } else if (itemId == R.id.images_item_pdf) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("Make PDF")
+                    .setMessage("Convert All/Selected images to PDF")
+                    .setPositiveButton("Convert All", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            convertImagesToPdf(true);
+
+                        }
+                    })
+                    .setNeutralButton("Convert Selected", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            convertImagesToPdf(false);
+
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    //convert image to pdf
+    private void convertImagesToPdf(boolean convertAll)
+    {
+        Log.d(TAG, "convertImagesToPdf: convertAll "+convertAll);
+        progressDialog.setMessage("Converting to PDF...");
+        progressDialog.show();
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "run: BG work start.....");
+
+                ArrayList<ModelImage> imagesToPdfList = new ArrayList<>();
+                if(convertAll){
+                    imagesToPdfList = allImageArrayList;
+                }
+                else
+                {
+                    //convert selected image only
+                    for (int i = 0 ; i<allImageArrayList.size(); i++)
+                    {
+                        if (allImageArrayList.get(i).isChecked())
+                        {
+                            imagesToPdfList.add(allImageArrayList.get(i));
+                        }
+                    }
+                }
+                Log.d(TAG, "run: imagesToPdfList size: "+imagesToPdfList.size());
+
+                try{
+
+                    //1) create folder where we will save the pdf
+                    File root = new File(mContext.getExternalFilesDir(null), Constant.PDF_FOLDER);
+                    root.mkdirs();
+
+                    //name with extension of the image
+                    long timestamp = System.currentTimeMillis();
+                    String fileName = "PDF " + timestamp + ".pdf";
+
+                    Log.d(TAG, "run: fileName "+fileName);
+
+
+                    File file = new File(root, fileName);
+                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                    PdfDocument pdfDocument = new PdfDocument();
+
+                    for(int i = 0; i<imagesToPdfList.size(); i++)
+                    {
+                        Uri imageToAddInPdfUri = imagesToPdfList.get(i).getImageUri();
+
+                        try {
+
+                            Bitmap bitmap;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContext.getContentResolver(), imageToAddInPdfUri));
+                            }
+                            else
+                            {
+                                bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imageToAddInPdfUri);
+                            }
+
+                            bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, false);
+                            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), i + 1).create();
+
+                            PdfDocument.Page page = pdfDocument.startPage(pageInfo);
+
+
+                            Paint paint = new Paint();
+                            paint.setColor(Color.WHITE);
+
+                            Canvas canvas = page.getCanvas();
+                            canvas.drawPaint(paint);
+                            canvas.drawBitmap(bitmap, 0f, 0f, null);
+
+                            pdfDocument.finishPage(page);
+                            bitmap.recycle();
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            Log.d(TAG, "run: ",e);
+
+                        }
+                    }
+
+                    pdfDocument.writeTo(fileOutputStream);
+                    pdfDocument.close();
+
+                }
+                catch (Exception e)
+                {
+                    progressDialog.dismiss();
+                    Log.d(TAG, "run: ", e);
+
+                }
+
+                //
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, "run: Converted...");
+                        progressDialog.dismiss();
+                        Toast.makeText(mContext, "Converted.......", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     private void deleteImages(boolean deleteAll) {

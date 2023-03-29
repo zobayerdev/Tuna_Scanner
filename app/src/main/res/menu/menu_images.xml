@@ -8,4 +8,10 @@
         android:title="Delete"
         app:showAsAction="always" />
 
+    <item android:id="@+id/images_item_pdf"
+        android:title="Convert to Pdf"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_pdf_black"
+        />
+
 </menu>

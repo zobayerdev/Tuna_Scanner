@@ -1,4 +1,4 @@
-package com.trodev.tunascanner;
+package com.trodev.tunascanner.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.trodev.tunascanner.Capture;
+import com.trodev.tunascanner.R;
 
 public class ScannerActivity extends AppCompatActivity {
 
