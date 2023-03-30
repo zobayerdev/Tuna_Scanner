@@ -198,9 +198,8 @@ public class ImageListFragment extends Fragment {
 
 
     //convert image to pdf
-    private void convertImagesToPdf(boolean convertAll)
-    {
-        Log.d(TAG, "convertImagesToPdf: convertAll "+convertAll);
+    private void convertImagesToPdf(boolean convertAll) {
+        Log.d(TAG, "convertImagesToPdf: convertAll " + convertAll);
         progressDialog.setMessage("Converting to PDF...");
         progressDialog.show();
 
@@ -214,23 +213,19 @@ public class ImageListFragment extends Fragment {
                 Log.d(TAG, "run: BG work start.....");
 
                 ArrayList<ModelImage> imagesToPdfList = new ArrayList<>();
-                if(convertAll){
+                if (convertAll) {
                     imagesToPdfList = allImageArrayList;
-                }
-                else
-                {
+                } else {
                     //convert selected image only
-                    for (int i = 0 ; i<allImageArrayList.size(); i++)
-                    {
-                        if (allImageArrayList.get(i).isChecked())
-                        {
+                    for (int i = 0; i < allImageArrayList.size(); i++) {
+                        if (allImageArrayList.get(i).isChecked()) {
                             imagesToPdfList.add(allImageArrayList.get(i));
                         }
                     }
                 }
-                Log.d(TAG, "run: imagesToPdfList size: "+imagesToPdfList.size());
+                Log.d(TAG, "run: imagesToPdfList size: " + imagesToPdfList.size());
 
-                try{
+                try {
 
                     //1) create folder where we will save the pdf
                     File root = new File(mContext.getExternalFilesDir(null), Constant.PDF_FOLDER);
@@ -240,15 +235,14 @@ public class ImageListFragment extends Fragment {
                     long timestamp = System.currentTimeMillis();
                     String fileName = "PDF " + timestamp + ".pdf";
 
-                    Log.d(TAG, "run: fileName "+fileName);
+                    Log.d(TAG, "run: fileName " + fileName);
 
 
                     File file = new File(root, fileName);
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     PdfDocument pdfDocument = new PdfDocument();
 
-                    for(int i = 0; i<imagesToPdfList.size(); i++)
-                    {
+                    for (int i = 0; i < imagesToPdfList.size(); i++) {
                         Uri imageToAddInPdfUri = imagesToPdfList.get(i).getImageUri();
 
                         try {
@@ -256,9 +250,7 @@ public class ImageListFragment extends Fragment {
                             Bitmap bitmap;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                                 bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContext.getContentResolver(), imageToAddInPdfUri));
-                            }
-                            else
-                            {
+                            } else {
                                 bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imageToAddInPdfUri);
                             }
 
@@ -279,10 +271,8 @@ public class ImageListFragment extends Fragment {
                             bitmap.recycle();
 
 
-                        }
-                        catch (Exception e)
-                        {
-                            Log.d(TAG, "run: ",e);
+                        } catch (Exception e) {
+                            Log.d(TAG, "run: ", e);
 
                         }
                     }
@@ -290,9 +280,7 @@ public class ImageListFragment extends Fragment {
                     pdfDocument.writeTo(fileOutputStream);
                     pdfDocument.close();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     progressDialog.dismiss();
                     Log.d(TAG, "run: ", e);
 

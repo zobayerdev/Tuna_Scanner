@@ -10,6 +10,7 @@
         android:title="Developer"
         android:id="@+id/nav_dev"
         android:icon="@drawable/ic_person"/>
+
     <item
         android:title="Privacy Policy"
         android:id="@+id/nav_policy"

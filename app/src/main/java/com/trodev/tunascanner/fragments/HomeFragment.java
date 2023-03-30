@@ -16,12 +16,14 @@ import com.trodev.tunascanner.activities.BarCodeGenerator;
 import com.trodev.tunascanner.activities.ContactActivity;
 import com.trodev.tunascanner.activities.MessageActivity;
 import com.trodev.tunascanner.activities.ProductQRActivity;
+import com.trodev.tunascanner.activities.ScanGalleryActivity;
 import com.trodev.tunascanner.activities.ScannerActivity;
 import com.trodev.tunascanner.activities.URLActivity;
+import com.trodev.tunascanner.activities.WifiQRActivity;
 
 
 public class HomeFragment extends Fragment {
-    private CardView contact, product_qr, weburl, message, barcode, scanqrbar;
+    private CardView contact, product_qr, weburl, message, barcode, scanqrbar , scangallery, wifi;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -36,6 +38,16 @@ public class HomeFragment extends Fragment {
         message = view.findViewById(R.id.message);
         barcode = view.findViewById(R.id.barcode);
         scanqrbar = view.findViewById(R.id.scanqrbar);
+        scangallery = view.findViewById(R.id.scangallery);
+        wifi = view.findViewById(R.id.wifi);
+
+        wifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WifiQRActivity.class);
+                startActivity(intent);
+            }
+        });
 
         product_qr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +93,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ScannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        scangallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ScanGalleryActivity.class);
                 startActivity(intent);
             }
         });
