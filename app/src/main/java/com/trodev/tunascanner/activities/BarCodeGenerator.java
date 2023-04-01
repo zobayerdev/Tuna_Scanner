@@ -1,22 +1,35 @@
 package com.trodev.tunascanner.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.trodev.tunascanner.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BarCodeGenerator extends AppCompatActivity {
 
@@ -24,6 +37,12 @@ public class BarCodeGenerator extends AppCompatActivity {
     private Button generate, download;
     private ImageView imageView;
     Bitmap bitmap;
+
+    // ads setting
+    private static final String TAG = "BANNER_AD_TAG";
+
+    //declear ad view
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +61,70 @@ public class BarCodeGenerator extends AppCompatActivity {
         download = findViewById(R.id.downloadBtn);
         // invisible download button ,  when user create a bar code then its show.
         download.setVisibility(View.INVISIBLE);
+
+        //initial  banner ads
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                Log.d(TAG, "onInitializationComplete: ");
+            }
+        });
+
+        MobileAds.setRequestConfiguration(
+                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("","")).build()
+        );
+
+        //init banner id
+        adView = findViewById(R.id.bannerAd);
+
+        //ad request
+        AdRequest adRequest = new AdRequest.Builder().build();
+        // load ad
+        adView.loadAd(adRequest);
+
+        //setup ad listener
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                Log.d(TAG, "onAdClicked: ");
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Log.d(TAG, "onAdClosed: ");
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.d(TAG, "onAdFailedToLoad: " + loadAdError.getMessage());
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.d(TAG, "onAdLoaded: ");
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                Log.d(TAG, "onAdOpened: ");
+            }
+
+            @Override
+            public void onAdSwipeGestureClicked() {
+                super.onAdSwipeGestureClicked();
+            }
+        });
+
 
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +170,33 @@ public class BarCodeGenerator extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        if(adView != null)
+        {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if(adView != null)
+        {
+            adView.resume();
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(adView != null)
+        {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     private Bitmap textToImageEncode(String value) throws WriterException {

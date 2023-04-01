@@ -16,4 +16,34 @@
 
     <string name="select">Select Network Type</string>
     <string name="select_encryption">Encryption</string>
+
+
+    <!--######################################################################-->
+    <!--Test Adds ID-->
+    <string name="app_id_test">ca-app-pub-3940256099942544~3347511713</string>
+    <!--Live ads ID-->
+    <string name="app_id_live">ca-app-pub-8096606763113050~1146519928</string>
+
+
+    <!--######################################################################-->
+    <!--Banner test ads string-->
+    <string name="banner_ad_test">ca-app-pub-3940256099942544/6300978111</string>
+    <!--Banner ID all-->
+    <string name="banner_ad_live">ca-app-pub-8096606763113050/7856232654</string>
+
+
+    <!--######################################################################-->
+    <!--interstitial test ads string-->
+    <string name="interstitial_ad_test">ca-app-pub-3940256099942544/1033173712</string>
+
+    <!--interstitial live ads string -->
+    <string name="interstitial_ad_live">ca-app-pub-8096606763113050/1114444927</string>
+
+
+    <!--######################################################################-->
+    <!--interstitial test ads string-->
+    <string name="reward_interstitial_ad_test">ca-app-pub-3940256099942544/5354046379</string>
+
+    <!--interstitial live ads string -->
+    <string name="reward_interstitial_ad_live">ca-app-pub-8096606763113050/2219395611</string>
 </resources>

@@ -49,7 +49,7 @@ public class WifiQRActivity extends AppCompatActivity {
         ssid = findViewById(R.id.ssid_text);
         encryption = findViewById(R.id.encryption);
         networkname = findViewById(R.id.networkEt);
-        password  = findViewById(R.id.passeordEt);
+        password = findViewById(R.id.passeordEt);
 
         download = findViewById(R.id.downloadBtn);
         download.setVisibility(View.INVISIBLE);
@@ -91,7 +91,7 @@ public class WifiQRActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (ssid.getText().toString().length() + networkname.getText().toString().length() + password.getText().toString().length() + encryption.getText().toString().length()== 0) {
+                if (ssid.getText().toString().length() + networkname.getText().toString().length() + password.getText().toString().length() + encryption.getText().toString().length() == 0) {
                     Toast.makeText(WifiQRActivity.this, "Make sure your given Text..!", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
