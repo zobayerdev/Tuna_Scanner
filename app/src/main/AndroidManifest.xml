@@ -20,7 +20,7 @@
         android:theme="@style/Theme.TunaScanner"
         tools:targetApi="31">
         <activity
-            android:name=".NativeAdsActivity"
+            android:name=".activities.NativeAdsActivity"
             android:exported="false" />
         <activity
             android:name=".activities.WifiQRActivity"
@@ -89,17 +89,12 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-<<<<<<< HEAD
         </provider>
 
-
-=======
-        </provider> <!-- must add this metadata -->
-        <!-- your ads id must add this project -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_id_test" />
->>>>>>> 1a233dbd71986b8cfe6aafb99ef19ef1e650d458
+
     </application>
 
 </manifest>
