@@ -6,6 +6,7 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -19,9 +20,12 @@
         android:theme="@style/Theme.TunaScanner"
         tools:targetApi="31">
         <activity
+            android:name=".NativeAdsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.WifiQRActivity"
             android:exported="false"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.ScanGalleryActivity"
             android:exported="false"
@@ -85,9 +89,17 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
+<<<<<<< HEAD
         </provider>
 
 
+=======
+        </provider> <!-- must add this metadata -->
+        <!-- your ads id must add this project -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/app_id_test" />
+>>>>>>> 1a233dbd71986b8cfe6aafb99ef19ef1e650d458
     </application>
 
 </manifest>

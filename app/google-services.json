@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "974804518110",
+    "project_id": "tuna-scanner",
+    "storage_bucket": "tuna-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974804518110:android:c1ea46273be0977b462e4f",
+        "android_client_info": {
+          "package_name": "com.trodev.tunascanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974804518110-rg2rj5q0q7u57ea7js8bu7vsrh7h081d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trodev.tunascanner",
+            "certificate_hash": "329b46005a84991a23830c47ed2ef83b51b18078"
+          }
+        },
+        {
+          "client_id": "974804518110-v73llpibdkt0uh0e5hggoc4cv7ibk9p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMOIHbjrAdC8uGfrLdZxHdkdCKYUahPMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974804518110-v73llpibdkt0uh0e5hggoc4cv7ibk9p1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

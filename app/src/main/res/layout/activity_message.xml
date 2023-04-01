@@ -65,7 +65,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
         </LinearLayout>
 
         <!--Button-->
@@ -73,12 +72,11 @@
             android:id="@+id/Generate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_ns_bold"
             android:backgroundTint="@color/black"
+            android:fontFamily="@font/sf_ns_bold"
             android:text="Create QR Code"
             android:textAllCaps="false"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
 
 
         <ImageView
@@ -96,12 +94,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/sf_ns_bold"
             android:backgroundTint="@color/black"
+            android:fontFamily="@font/sf_ns_bold"
             android:text="Download Now"
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textStyle="bold|italic" />
+
 
     </LinearLayout>
 

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dialog_background"
+
     android:orientation="vertical">
 
 
@@ -23,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 app:cardBackgroundColor="@color/purple_700"
+                android:backgroundTint="@color/white"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="3dp">
 
@@ -36,11 +38,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="ডেভেলপমেন্টে যারা রয়েছেন"
+                        android:fontFamily="@font/kalpurush"
+                        android:text="Developed By"
                         android:textAlignment="center"
-                        android:textColor="@color/purple_200"
-                        android:textSize="25sp"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
                         android:textStyle="bold" />
 
 <!--                    <ImageView
@@ -52,7 +54,7 @@
                     <pl.droidsonroids.gif.GifImageView
                         android:layout_width="150dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_person"
+                        android:src="@drawable/tuna_scanner"
                         android:layout_gravity="center"
                         />
 
@@ -62,43 +64,23 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="This app is developed by Trodev."
+                        android:fontFamily="@font/trebuc"
+                        android:text="This app is developed by Altai Platforms"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="Head Developer:\n           Md. Zobayer Hasan Nayem \n           Software Engineer of Trodev \n"
-                        android:textColor="@color/purple_200"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="Sub Developer:\n           Pias Miah \n           Software Developer of Trodev \n"
-                        android:textColor="@color/purple_200"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="যোগাযোগ করতে নিম্মক্ত লিঙ্কে click করুন"
+                        android:fontFamily="@font/kalpurush"
+                        android:text="If you facing any problem please you can contact \nwith us."
                         android:textAlignment="center"
-                        android:textColor="@color/purple_200"
-                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
 
@@ -106,42 +88,40 @@
                         android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="1dp"
                         android:layout_marginTop="5dp"
-                        android:autoLink="email"
-                        android:fontFamily="@font/ubuntu_bold"
+                        android:fontFamily="@font/trebuc"
                         android:gravity="left"
-                        android:text="zobayer.dev@gmail.com"
-                        android:textColor="@color/purple_200"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:text="users.altaiplatforms@gmail.com"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                         />
 
                     <TextView
                         android:id="@+id/mobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="1dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
-                        android:autoLink="phone"
-                        android:fontFamily="@font/ubuntu_bold"
+                        android:fontFamily="@font/trebuc"
                         android:gravity="left"
                         android:text="+8801615257555\n+8801638752371"
-                        android:textColor="@color/purple_200"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/ubuntu_bold"
+                        android:fontFamily="@font/sf_ns_bold"
                         android:text="copyright 2022 all reserved by Trodev."
                         android:textAlignment="center"
-                        android:textColor="@color/purple_200"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
 
                 </LinearLayout>
