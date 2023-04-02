@@ -32,12 +32,10 @@ import java.util.Objects;
 import androidmads.library.qrgenearator.BuildConfig;
 
 public class MainActivity extends AppCompatActivity {
-
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
-
     private long pressedTime;
 
 
@@ -46,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         drawerLayout = findViewById(R.id.drawerlayout);
         navigationView = findViewById(R.id.navigation_view);
-
 
         // #######################
         // Drawer Layout implement
@@ -62,10 +58,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         loadHomeFragment();
-
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -193,8 +187,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Developer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_policy:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.app-privacy-policy.com/live.php?token=qB3iS10fUJmr6yEFtaVo9yve0uuPP3Ok")));
-                Toast.makeText(this, "Privacy Policy", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, PrivacyPolicyActivity.class);
+                startActivity(intent);
+                /* startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.app-privacy-policy.com/live.php?token=qB3iS10fUJmr6yEFtaVo9yve0uuPP3Ok")));
+                Toast.makeText(this, "Privacy Policy", Toast.LENGTH_SHORT).show();*/
                 break;
             case R.id.nav_share:
                 try {

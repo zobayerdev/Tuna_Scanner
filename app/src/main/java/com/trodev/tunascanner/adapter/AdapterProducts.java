@@ -28,7 +28,7 @@ import com.trodev.tunascanner.models.ModelProduct;
 
 import java.util.ArrayList;
 
-public class adapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     //variable
     private Context context;
@@ -40,7 +40,7 @@ public class adapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int VIEW_TYPE_CONTENT = 0;
     private static final int VIEW_TYPE_AD = 1;
 
-    public adapterProducts(Context context, ArrayList<ModelProduct> productArrayList) {
+    public AdapterProducts(Context context, ArrayList<ModelProduct> productArrayList) {
         this.context = context;
         this.productArrayList = productArrayList;
     }
@@ -91,7 +91,7 @@ public class adapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             //view type is nativead, setup, show nativead
 
             //load ad'
-            AdLoader adLoader = new AdLoader.Builder(context, "")
+            AdLoader adLoader = new AdLoader.Builder(context, context.getString(R.string.native_ad_test))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
                         public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {

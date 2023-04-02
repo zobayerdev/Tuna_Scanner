@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.nativead.NativeAd;
 import com.trodev.tunascanner.R;
 import com.trodev.tunascanner.activities.BarCodeGenerator;
 import com.trodev.tunascanner.activities.ContactActivity;
 import com.trodev.tunascanner.activities.MessageActivity;
+import com.trodev.tunascanner.activities.NativeAdsActivity;
 import com.trodev.tunascanner.activities.ProductQRActivity;
 import com.trodev.tunascanner.activities.ScanGalleryActivity;
 import com.trodev.tunascanner.activities.ScannerActivity;
@@ -23,7 +25,7 @@ import com.trodev.tunascanner.activities.WifiQRActivity;
 
 
 public class HomeFragment extends Fragment {
-    private CardView contact, product_qr, weburl, message, barcode, scanqrbar , scangallery, wifi;
+    private CardView contact, product_qr, weburl, message, barcode, scanqrbar, scangallery, wifi;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -68,7 +70,7 @@ public class HomeFragment extends Fragment {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                Intent intent = new Intent(getActivity(), NativeAdsActivity.class);
                 startActivity(intent);
             }
         });
