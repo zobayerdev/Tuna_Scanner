@@ -42,7 +42,7 @@ public class ContactActivity extends AppCompatActivity {
 
     //declear interstitial ad
     private InterstitialAd mInterstitialAd = null;
-    private static final String TAG = "INTERESTITIAL_TAG";
+    private static final String TAG = "INTERSTITIAL_TAG";
 
 
     @SuppressLint("MissingInflatedId")
@@ -60,7 +60,7 @@ public class ContactActivity extends AppCompatActivity {
         });
 
         //get test ads on a physical devices
-        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("TEST_DEVICEID1", "TEST_DEVICE_ID_N")).build()
+        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("TEST_DEVICE_ID1", "TEST_DEVICE_ID_N")).build()
         );
 
         loadInterstitialAd();
