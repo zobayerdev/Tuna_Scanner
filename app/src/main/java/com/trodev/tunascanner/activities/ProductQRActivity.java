@@ -83,6 +83,7 @@ public class ProductQRActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 workingProcess();
+                showRewardedInterstitialAd();
             }
         });
 
@@ -92,7 +93,7 @@ public class ProductQRActivity extends AppCompatActivity {
     // Ads Settings in android studio
     // load ad when activity starts and show on button click
     private void loadRewardedInterstitialAd() {
-        RewardedInterstitialAd.load(this, getString(R.string.reward_interstitial_ad_test), new AdRequest.Builder().build(),
+        RewardedInterstitialAd.load(this, getString(R.string.reward_interstitial_ad_live), new AdRequest.Builder().build(),
                 new RewardedInterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {
@@ -100,7 +101,6 @@ public class ProductQRActivity extends AppCompatActivity {
                         /*Called when as is loaded*/
                         Log.d(TAG, "onAdLoaded:  ");
                         mRewardedInterstitialAd = rewardedInterstitialAd;
-                        showRewardedInterstitialAd();
                     }
 
                     @Override

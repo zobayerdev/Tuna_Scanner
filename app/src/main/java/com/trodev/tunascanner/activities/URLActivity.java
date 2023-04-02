@@ -64,7 +64,8 @@ public class URLActivity extends AppCompatActivity {
         });
 
         //get test ads on a physical devices
-        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("TEST_DEVICE_ID1", "TEST_DEVICE_ID_N")).build()
+        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("TEST_DEVICE_ID1", "TEST_DEVICE_ID_N")).build()
         );
 
         loadInterstitialAd();
@@ -83,10 +84,9 @@ public class URLActivity extends AppCompatActivity {
 
                 showInterstitialAd();
 
-                if ( websiteET.getText().toString().length() + urlET.getText().toString().length() == 0) {
+                if (websiteET.getText().toString().length() + urlET.getText().toString().length() == 0) {
                     Toast.makeText(URLActivity.this, "Make sure your given Text..!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     try {
                         bitmap = textToImageEncode("Website Name:  " + websiteET.getText().toString().trim() + "\nWebsite URL:  " + urlET.getText().toString().trim());   // + "\n\n\nMake by Altai Platforms"
                         imageView.setImageBitmap(bitmap);
@@ -140,7 +140,7 @@ public class URLActivity extends AppCompatActivity {
 
 
         // change ads id on adUnit_id
-        InterstitialAd.load(this, getResources().getString(R.string.interstitial_ad_test),  adRequest,  new InterstitialAdLoadCallback() {
+        InterstitialAd.load(this, getResources().getString(R.string.interstitial_ad_live), adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                 super.onAdFailedToLoad(loadAdError);

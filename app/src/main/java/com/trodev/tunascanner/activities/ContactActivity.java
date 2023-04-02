@@ -44,7 +44,6 @@ public class ContactActivity extends AppCompatActivity {
     private InterstitialAd mInterstitialAd = null;
     private static final String TAG = "INTERSTITIAL_TAG";
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +135,7 @@ public class ContactActivity extends AppCompatActivity {
         // ad request to load interstitial ad
         AdRequest adRequest = new AdRequest.Builder().build();
         // change ads id on adUnit_id
-        InterstitialAd.load(this, getResources().getString(R.string.interstitial_ad_test),  adRequest,  new InterstitialAdLoadCallback() {
+        InterstitialAd.load(this, getResources().getString(R.string.interstitial_ad_live), adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                 super.onAdFailedToLoad(loadAdError);

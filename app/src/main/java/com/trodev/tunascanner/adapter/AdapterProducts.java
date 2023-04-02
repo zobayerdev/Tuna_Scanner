@@ -91,7 +91,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
             //view type is nativead, setup, show nativead
 
             //load ad'
-            AdLoader adLoader = new AdLoader.Builder(context, context.getString(R.string.native_ad_test))
+            AdLoader adLoader = new AdLoader.Builder(context, context.getString(R.string.native_ad_live))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
                         public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
@@ -164,7 +164,7 @@ public class AdapterProducts extends RecyclerView.Adapter<RecyclerView.ViewHolde
         String advertiser = nativeAd.getAdvertiser();
         MediaContent mediaContent = nativeAd.getMediaContent();
 
-        /*---------same assets aren't guaranteed to be in every Nativead, so we need to check before displaying them------------*/
+        /*---------same assets aren't guaranteed to be in every Native Ad, so we need to check before displaying them------------*/
         if (headline == null) {
             holderNativeAd.ads_headline.setVisibility(View.INVISIBLE);
 

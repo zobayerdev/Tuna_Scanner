@@ -49,7 +49,8 @@ public class NativeAdsActivity extends AppCompatActivity {
             }
         });
 
-        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("ADD_TEST_DEVICE_ID_HERE", "ADD_TEST_DEVICE_ID_HERE")).build()
+        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("ADD_TEST_DEVICE_ID_HERE", "ADD_TEST_DEVICE_ID_HERE")).build()
         );
 
         loadProducts();

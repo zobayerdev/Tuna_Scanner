@@ -42,25 +42,38 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.trodev.tunascanner.Constant;
 import com.trodev.tunascanner.R;
+import com.trodev.tunascanner.activities.ContactActivity;
 import com.trodev.tunascanner.adapter.AdapterImage;
 import com.trodev.tunascanner.models.ModelImage;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
 public class ImageListFragment extends Fragment {
-
     private static final String TAG = "IMAGE_LIST_TAG";
-
     private static final int STORAGE_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 101;
+
+    //declear interstitial ad
+    private InterstitialAd mInterstitialAd = null;
+    private static final String TAGS = "INTERSTITIAL_TAG";
 
     // arrays of permissions required to pick image from camera/gallery
     private String[] cameraPermission;
@@ -112,6 +125,20 @@ public class ImageListFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
 
         loadImages();
+
+        //initital mobile ads
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                Log.d(TAG, "onInitializationComplete: " + initializationStatus);
+            }
+        });
+
+        //get test ads on a physical devices
+        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("TEST_DEVICE_ID1", "TEST_DEVICE_ID_N")).build()
+        );
+
+        loadInterstitialAd();
 
         addImageFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,20 +201,21 @@ public class ImageListFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             convertImagesToPdf(true);
-
+                            showInterstitialAd();
                         }
                     })
                     .setNeutralButton("Convert Selected", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             convertImagesToPdf(false);
-
+                            showInterstitialAd();
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+                            showInterstitialAd();
                         }
                     })
                     .show();
@@ -579,6 +607,79 @@ public class ImageListFragment extends Fragment {
 
             }
             break;
+
+        }
+    }
+
+
+    private void loadInterstitialAd() {
+        // ad request to load interstitial ad
+        AdRequest adRequest = new AdRequest.Builder().build();
+        // change ads id on adUnit_id
+        InterstitialAd.load(getContext(), getResources().getString(R.string.interstitial_ad_test), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                // called when ads is failed
+                Log.d(TAG, "onAdFailedToLoad: ");
+                mInterstitialAd = null;
+            }
+
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                super.onAdLoaded(interstitialAd);
+                //called when ads loaded
+                Log.d(TAG, "onAdLoaded: ");
+                mInterstitialAd = interstitialAd;
+            }
+        });
+
+    }
+
+    private void showInterstitialAd() {
+        if (mInterstitialAd != null) {
+            Log.d(TAG, "showInterstitialAd: Ad was loaded");
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdClicked() {
+                    super.onAdClicked();
+                }
+
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent();
+                    Log.d(TAG, "onAdDismissedFullScreenContent: ");
+                    //don't forget to set the ad reference to null so you don;t show the same ad again
+                    mInterstitialAd = null;
+                    loadInterstitialAd();
+                    Toast.makeText(getContext(), "Ad is closes, here by you can perform the task ", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.d(TAG, "onAdFailedToShowFullScreenContent: ");
+                    mInterstitialAd = null;
+
+                }
+
+                @Override
+                public void onAdImpression() {
+                    super.onAdImpression();
+                }
+
+                @Override
+                public void onAdShowedFullScreenContent() {
+                    super.onAdShowedFullScreenContent();
+                    Log.d(TAG, "onAdShowedFullScreenContent: ");
+                }
+            });
+
+            mInterstitialAd.show(getActivity());
+        } else {
+            Log.d(TAG, "showInterstitialAd: Ad was not loaded.....");
+            //you may also do your task here if ad is not loaded
+            Toast.makeText(getContext(), "Ad was not loaded, here by you can also perform the task ", Toast.LENGTH_SHORT).show();
 
         }
     }
